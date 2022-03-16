@@ -541,7 +541,7 @@ class App extends SliverPersistentHeaderDelegate {
   double get maxExtent => height;
 
   @override
-  double get minExtent => 60;
+  double get minExtent => 80;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
