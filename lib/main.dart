@@ -1,0 +1,474 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'SliverPersistentHeader',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(title: 'SliverPersistentHeader'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  var images = [
+    'assets/images/cupcake.png',
+    'assets/images/pudding.png',
+    'assets/images/present.png',
+    'assets/images/popsicle.png',
+    'assets/images/ice-pop.png',
+    'assets/images/donut.png',
+    'assets/images/cupcake.png',
+    'assets/images/pudding.png',
+    'assets/images/present.png',
+    'assets/images/popsicle.png',
+    'assets/images/ice-pop.png',
+    'assets/images/donut.png',
+  ];
+
+  var images1 = [
+    'assets/images/embassy.png',
+    'assets/images/office-building.png',
+    'assets/images/photo-gallery.png',
+    'assets/images/smoking-area.png',
+    'assets/images/club.png',
+    'assets/images/embassy.png',
+    'assets/images/office-building.png',
+    'assets/images/photo-gallery.png',
+    'assets/images/smoking-area.png',
+    'assets/images/club.png',
+  ];
+
+  var images2 = [
+    'assets/images/paragliding.jpg',
+    'assets/images/mountainbike.jpg',
+    'assets/images/basketball.jpg',
+    'assets/images/voallyball.jpg',
+    'assets/images/cricket.jpg',
+    'assets/images/hockey.jpg',
+    'assets/images/images.jpg',
+    'assets/images/nazabazi.jpg',
+    'assets/images/football1.jpg',
+    'assets/images/cricket.jpg',
+  ];
+  var list = [
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals',
+    'Introduction to Driving',
+    'Observation at Junctions',
+    'Reverse Parallel Parking',
+    'Reversing Around Corner',
+    'Incorrect Use Of Signals'
+  ];
+  var subtitles = [
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced',
+    'Begineer',
+    'Begineer',
+    'Intermediate',
+    'Intermediate',
+    'Advanced'
+  ];
+  var icon = [
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+    Icons.car_repair,
+    Icons.panorama_photosphere_select_outlined,
+    Icons.pedal_bike_rounded,
+    Icons.car_rental_outlined,
+    Icons.shopping_basket_rounded,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
+        bottomNavigationBar: Container(
+          color: const Color.fromRGBO(58, 66, 86, 1.0),
+          height: 55.0,
+          child: BottomAppBar(
+            color: const Color.fromRGBO(58, 66, 86, 1.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.home, color: Colors.white),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.blur_on, color: Colors.white),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.hotel, color: Colors.white),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.account_box, color: Colors.white),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: CustomScrollView(
+          scrollDirection: Axis.vertical,
+          reverse: false,
+          slivers: [
+            SliverAppBar(
+              leading: const Icon(
+                Icons.arrow_back_ios_new_sharp,
+                color: Colors.black,
+              ),
+              actions: [
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    )),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                    )),
+              ],
+              pinned: true,
+              stretch: true,
+              expandedHeight: 250,
+              flexibleSpace: const FlexibleSpaceBar(
+                collapseMode: CollapseMode.pin,
+                stretchModes: [
+                  StretchMode.blurBackground,
+                  StretchMode.fadeTitle,
+                ],
+                centerTitle: true,
+                title: Text(
+                  'Mountains',
+                  style: TextStyle(
+                    fontFamily: 'Allison',
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                background: Image(
+                  image: AssetImage('assets/images/mountains.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            ACustomSliverHeader(
+              backgroundColor: Colors.amber.shade700,
+              headerTitle: 'Cake',
+            ),
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Card(
+                    color: Colors.white,
+                    elevation: 10,
+                    margin: const EdgeInsets.all(5),
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Image(
+                          image: AssetImage(images[index]),
+                          fit: BoxFit.cover,
+                        )),
+                  );
+                },
+                childCount: images.length,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                childAspectRatio: 1.0,
+              ),
+            ),
+            const ACustomSliverHeader(
+              backgroundColor: Colors.green,
+              headerTitle: 'City Buildings',
+            ),
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(5),
+                    elevation: 10,
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Image(
+                          image: AssetImage(images1[index]),
+                          fit: BoxFit.cover,
+                        )),
+                  );
+                },
+                childCount: images1.length,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                childAspectRatio: 1.0,
+              ),
+            ),
+            ACustomSliverHeader(
+              backgroundColor: Colors.blue.shade900,
+              headerTitle: 'Sports',
+            ),
+            SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(5),
+                    elevation: 10,
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: Image(
+                          image: AssetImage(images2[index]),
+                          fit: BoxFit.cover,
+                        )),
+                  );
+                },
+                childCount: images2.length,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                childAspectRatio: 1.0,
+              ),
+            ),
+            const ACustomSliverHeader(
+              backgroundColor: Colors.pink,
+              headerTitle: 'Lessons',
+            ),
+            SliverList(
+                delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Card(
+                  elevation: 8.0,
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 6.0),
+                  child: Container(
+                      decoration: const BoxDecoration(
+                          color: Color.fromRGBO(64, 75, 96, .9)),
+                      child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10.0),
+                          leading: Container(
+                            padding: const EdgeInsets.only(right: 12.0),
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                    right: BorderSide(
+                                        width: 1.0, color: Colors.white24))),
+                            child: Icon(icon[index], color: Colors.white),
+                          ),
+                          title: Text(
+                            list[index],
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Row(
+                            children: <Widget>[
+                              const Icon(Icons.linear_scale,
+                                  color: Colors.yellowAccent),
+                              Text(subtitles[index],
+                                  style: const TextStyle(color: Colors.white))
+                            ],
+                          ),
+                          trailing: const Icon(Icons.keyboard_arrow_right,
+                              color: Colors.white, size: 30.0))),
+                );
+              },
+              childCount: list.length,
+            )),
+          ],
+        ));
+  }
+}
+
+class ACustomSliverHeader extends StatelessWidget {
+  final Color backgroundColor;
+  final String headerTitle;
+
+  const ACustomSliverHeader({
+    Key? key,
+    required this.backgroundColor,
+    required this.headerTitle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: true,
+      floating: false,
+      delegate: Delegate(backgroundColor, headerTitle),
+    );
+  }
+}
+
+class Delegate extends SliverPersistentHeaderDelegate {
+  final Color backgroundColor;
+  final String headerTitle;
+
+  Delegate(this.backgroundColor, this.headerTitle);
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: backgroundColor,
+      child: Center(
+        child: Text(
+          headerTitle,
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 35,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 100;
+
+  @override
+  double get minExtent => 60;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
