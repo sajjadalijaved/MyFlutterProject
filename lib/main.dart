@@ -237,49 +237,51 @@ class _MyHomePageState extends State<MyHomePage> {
           scrollDirection: Axis.vertical,
           reverse: false,
           slivers: [
-            SliverAppBar(
-              leading: const Icon(
-                Icons.arrow_back_ios_new_sharp,
-                color: Colors.black,
-              ),
-              actions: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    )),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    )),
-              ],
-              pinned: true,
-              stretch: true,
-              expandedHeight: 250,
-              flexibleSpace: const FlexibleSpaceBar(
-                collapseMode: CollapseMode.pin,
-                stretchModes: [
-                  StretchMode.blurBackground,
-                  StretchMode.fadeTitle,
-                ],
-                centerTitle: true,
-                title: Text(
-                  'Mountains',
-                  style: TextStyle(
-                    fontFamily: 'Allison',
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                background: Image(
-                  image: AssetImage('assets/images/mountains.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            SliverPersistentHeader(
+                pinned: true, floating: true, delegate: App(height: 250)),
+            // SliverAppBar(
+            //   leading: const Icon(
+            //     Icons.arrow_back_ios_new_sharp,
+            //     color: Colors.black,
+            //   ),
+            //   actions: [
+            //     IconButton(
+            //         onPressed: () {},
+            //         icon: const Icon(
+            //           Icons.search,
+            //           color: Colors.black,
+            //         )),
+            //     IconButton(
+            //         onPressed: () {},
+            //         icon: const Icon(
+            //           Icons.menu,
+            //           color: Colors.black,
+            //         )),
+            //   ],
+            //   pinned: true,
+            //   stretch: true,
+            //   expandedHeight: 250,
+            //   flexibleSpace: const FlexibleSpaceBar(
+            //     collapseMode: CollapseMode.pin,
+            //     stretchModes: [
+            //       StretchMode.blurBackground,
+            //       StretchMode.fadeTitle,
+            //     ],
+            //     centerTitle: true,
+            //     title: Text(
+            //       'Mountains',
+            //       style: TextStyle(
+            //         fontFamily: 'Allison',
+            //         fontSize: 30,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //     ),
+            //     background: Image(
+            //       image: AssetImage('assets/images/mountains.jpg'),
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ),
             ACustomSliverHeader(
               backgroundColor: Colors.amber.shade700,
               headerTitle: 'Cake',
@@ -465,10 +467,84 @@ class Delegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => 100;
 
   @override
-  double get minExtent => 60;
+  double get minExtent => kToolbarHeight;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
+
+class App extends SliverPersistentHeaderDelegate {
+  double height;
+  App({required this.height});
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Stack(
+      children: [
+        Opacity(
+          opacity: appear(shrinkOffset),
+          child: myapp(),
+        ),
+        Opacity(
+          opacity: disAppear(shrinkOffset),
+          child: myimage(),
+        )
+      ],
+    );
+  }
+
+  Widget myapp() {
+    return AppBar(
+      centerTitle: true,
+      leading: const Icon(
+        Icons.arrow_back_ios_new_sharp,
+        color: Colors.black,
+      ),
+      title: const Text('Mountains'),
+      actions: [
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
+            )),
+        IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.black,
+            )),
+      ],
+    );
+  }
+
+  Widget myimage() {
+    return Image(
+      height: height,
+      width: double.infinity,
+      image: const AssetImage('assets/images/mountains.jpg'),
+      fit: BoxFit.cover,
+    );
+  }
+
+  double disAppear(double shrink) {
+    return 1 - shrink / height;
+  }
+
+  double appear(double shrink) {
+    return shrink / height;
+  }
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  double get minExtent => 60;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
     return true;
   }
 }
